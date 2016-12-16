@@ -18,7 +18,7 @@ You need to have [Docker Compose](https://docs.docker.com/compose/install/) inst
 
 ### Configuration
 
-You can edit the maridb environment variables in `docker-compose.yml` to set your smtp and mailtrain settings
+You can edit the maridb environment variables in `docker-compose.yml` to set your smtp settings
 
 You can edit the Mailtrain configuration file in `config/mailtrain/production.toml`
 
@@ -39,6 +39,7 @@ You can log in to any of the container by running the following command:
 ### Access to Mailtrain
 
 You can acces to the Mailtrain app via the port `3000`. In your browser at the following address `http://localhost:3000`.
+Login with `admin` / `test`
 
 
 
