@@ -1,0 +1,90 @@
+# Process title visible in monitoring logs and process listing
+title="mailtrain"
+
+# If you start out as a root user (eg. if you want to use ports lower than 1000)
+# then you can downgrade the user once all services are up and running
+user="mailtrain"
+group="mailtrain"
+
+[log]
+# silly|verbose|info|http|warn|error|silent
+level="verbose"
+
+[www]
+port=3000
+host="0.0.0.0"
+secret="secret"
+# Session length in seconds when "remember me" is checked
+remember=2592000 # 30 days
+# logger interface for expressjs morgan
+log="dev"
+# Is the server behind a proxy? true/false
+# Set this to true if you are serving Mailtrain as a virtual domain through Nginx or Apache
+proxy=false
+# maximum POST body size
+postsize="2MB"
+# Uncomment to set uploads folder location for temporary data. Defaults to os.tmpdir()
+# If the service is started by `npm start` then os.tmpdir() points to CWD
+#tmpdir="/tmp"
+
+[mysql]
+host="mariadb"
+user="mailtrain"
+password="mailtrain"
+database="mailtrain"
+port=3306
+charset="utf8mb4"
+timezone="local"
+
+[redis]
+enabled=true
+host="redis"
+port=6379
+db=5
+# Uncomment if your Redis installation requires a password
+#password=""
+
+[verp]
+# Enable to start an MX server that detects bounced messages using VERP
+# In most cases you do not want to use it
+# Requires root privileges
+enabled=false
+port=25
+host="0.0.0.0"
+
+[testserver]
+# Starts a vanity server that redirects all mail to /dev/null
+# Mostly needed for local development
+enabled=false
+port=5587
+host="0.0.0.0"
+username="testuser"
+password="testpass"
+logger=false
+
+[ldap]
+# enable to use ldap user backend
+enabled=false
+host="localhost"
+port=3002
+baseDN="ou=users,dc=company"
+filter="(|(username={{username}})(mail={{username}}))"
+passwordresetlink=""
+
+[postfixbounce]
+# Enable to allow writing Postfix bounce log to Mailtrain listener
+# If enabled, tail mail.log to Mailtrain with the following command:
+#     tail -f -n +0 /var/log/mail.log | nc localhost 5699 -
+enabled=true
+port=5699
+# allow connections from localhost only
+host="127.0.0.1"
+
+# extra options for nodemailer
+[nodemailer]
+#textEncoding="base64"
+
+[queue]
+# How many parallel sender processes to spawn
+# You can use more than 1 process only if you have Redis enabled
+processes=1

@@ -1,0 +1,42 @@
+version: '2'
+
+volumes:
+  db-mailtrain: {}
+  redis-mailtrain: {}
+
+services:
+
+  redis:
+    image: redis:3.0
+    volumes:
+      - redis-mailtrain:/data
+
+  mariadb:
+    image: mariadb:10
+    environment:
+      MYSQL_USER: mailtrain
+      MYSQL_PASSWORD: mailtrain
+      MYSQL_DATABASE: mailtrain
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MAILTRAIN_DEFAULT_EMAIL: default@omain.tld
+      MAILTRAIN_USER_EMAIL: mailtrain@domain.tld
+      MAILTRAIN_USER: mailtrain
+      MAILTRAIN_PASSWORD: password
+      SMTP_PORT: 25
+      SMTP_PASS: mailtrain
+      SMTP_ENCRYPTYION: NONE
+      DKIM_API_KEY: mailtrain
+    volumes:
+      - ./container/mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - db-mailtrain:/var/lib/mysql
+
+  mailtrain:
+    build: ./container/mailtrain
+    volumes:
+      - ./config/mailtrain:/git/mailtrain/config
+    links:
+      - mariadb:mariadb
+      - redis:redis
+    ports:
+      - 3000:3000
+      - 5699:5699
