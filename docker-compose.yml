@@ -20,10 +20,9 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MAILTRAIN_DEFAULT_EMAIL: default@omain.tld
       MAILTRAIN_USER_EMAIL: mailtrain@domain.tld
-      MAILTRAIN_USER: mailtrain
-      MAILTRAIN_PASSWORD: password
-      SMTP_PORT: 25
+      SMTP_USER: mailtrain
       SMTP_PASS: mailtrain
+      SMTP_PORT: 25
       SMTP_ENCRYPTYION: NONE
       DKIM_API_KEY: mailtrain
     volumes:
