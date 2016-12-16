@@ -18,15 +18,7 @@ services:
       MYSQL_PASSWORD: mailtrain
       MYSQL_DATABASE: mailtrain
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MAILTRAIN_DEFAULT_EMAIL: default@omain.tld
-      MAILTRAIN_USER_EMAIL: mailtrain@domain.tld
-      SMTP_USER: mailtrain
-      SMTP_PASS: mailtrain
-      SMTP_PORT: 25
-      SMTP_ENCRYPTYION: NONE
-      DKIM_API_KEY: mailtrain
     volumes:
-      - ./container/mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - db-mailtrain:/var/lib/mysql
 
   mailtrain:

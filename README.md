@@ -7,7 +7,7 @@ This repository lets you run Mailtrain in multiple Docker containers. Docker Com
 This compose environment uses 3 containers:
 
 - mariadb: A database that contains Mailtrain data.
-- redis: A redis server used for session storage and for caching state between multiple processes. 
+- redis: A redis server used for session storage and for caching state between multiple processes.
 - mailtrain: The [Mailtrain](https://github.com/andris9/mailtrain) application
 
 ## Requirements
@@ -17,8 +17,6 @@ You need to have [Docker Compose](https://docs.docker.com/compose/install/) inst
 ## How to use it?
 
 ### Configuration
-
-You can edit the maridb environment variables in `docker-compose.yml` to set your smtp settings
 
 You can edit the Mailtrain configuration file in `config/mailtrain/production.toml`
 
